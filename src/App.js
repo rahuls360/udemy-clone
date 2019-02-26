@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar";
 import Course from "./components/Course";
+import base from "./base";
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +47,18 @@ class App extends Component {
       }
     };
   }
+
+  componentDidMount() {
+    this.ref = base.syncState("Udemy-Clone", {
+      context: this,
+      state: "courses"
+    });
+  }
+
+  componentWillUnmount() {
+    // base.removeBinding(this.ref);
+  }
+
   render() {
     return (
       <div className="App">
