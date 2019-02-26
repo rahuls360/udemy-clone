@@ -53,7 +53,9 @@ class App extends Component {
         <div className="courses container">
           <div className="row">
             {Object.keys(this.state.courses).map(key => {
-              return <Course {...this.state.courses[key]} key={key} />;
+              return (
+                <Course {...this.state.courses[key]} key={key} index={key} />
+              );
             })}
           </div>
         </div>
