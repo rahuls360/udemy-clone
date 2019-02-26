@@ -13,11 +13,15 @@ code {
     monospace;
 }
 
-.course img{
+.course img {
   display: block;
   margin: auto;
 }
 
 .course p {
   text-align: center;
+}
+
+.col-md-6 {
+  margin-bottom: 5em;
 }
