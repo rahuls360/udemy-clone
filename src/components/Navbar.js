@@ -17,10 +17,12 @@ const Navbar = () => (
           <a href="/courses">Courses</a>
         </li>
         <li>
-        <a href="#" data-toggle="modal" data-target="#login">Login</a>
+        <a href="#" data-toggle="modal" data-target="#login" // eslint-disable-line
+        >Login</a>
         </li>
         <li>
-          <a href="#" data-toggle="modal" data-target="#register">Register</a>
+          <a href="#" data-toggle="modal" data-target="#register" // eslint-disable-line 
+          >Register</a>
         </li>
       </ul>
     </div>
