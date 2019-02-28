@@ -29,10 +29,24 @@ class App extends Component {
     base.removeBinding(this.ref);
   }
 
+  checkUser = (userData) => {
+    console.log(this.state.courses);
+    // if(userData.isNewUser){
+      var immediatelyAvailableReference = base.push('users/' + userData.uid, {
+        data: {courses: Array(Object.keys(this.state.courses).length).fill(false), userData: userData}
+      }).then(newLocation => {
+        var generatedKey = newLocation.key;
+        console.log(newLocation);
+      }).catch(err => {
+        console.log(err);
+      });
+    // }
+  }
+
   render() {
     return (
       <div className="App">
-        <Navbar> </Navbar>
+        <Navbar checkUser={this.checkUser}> </Navbar>
         <div className="courses container">
           <div className="row">
             {Object.keys(this.state.courses).map(key => {

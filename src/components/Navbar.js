@@ -5,18 +5,21 @@ import $ from 'jquery'
 class Navbar extends React.Component{
   loginWithGoogle = () =>{
         var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
+        firebase.auth().signInWithPopup(provider).then((result) => {
           let user = result.user;
           let userData = {
             displayName: user.displayName,
             photoURL: user.photoURL,
             email: user.email,
             uid: user.uid,
-            authToken: result.credential.accessToken
+            authToken: result.credential.accessToken,
+            isNewUser: result.additionalUserInfo.isNewUser
           }
-          console.log(userData);
           $('#login').modal('hide');
-        }).catch(function(error) {
+
+          this.props.checkUser(userData);
+
+        }).catch((error) => {
           $('#login').modal('hide');
           console.log(error);
         });
