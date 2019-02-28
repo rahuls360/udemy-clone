@@ -32,7 +32,7 @@ class App extends Component {
   checkUser = (userData) => {
     console.log(this.state.courses);
     // if(userData.isNewUser){
-      var immediatelyAvailableReference = base.push('users/' + userData.uid, {
+      var immediatelyAvailableReference = base.post('users/' + userData.uid, {
         data: {courses: Array(Object.keys(this.state.courses).length).fill(false), userData: userData}
       }).then(newLocation => {
         var generatedKey = newLocation.key;
