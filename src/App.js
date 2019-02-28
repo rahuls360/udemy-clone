@@ -3,6 +3,13 @@ import Navbar from "./components/Navbar";
 import Course from "./components/Course";
 import base from "./base";
 
+import 'bootstrap/dist/css/bootstrap.css';
+
+if (typeof window !== 'undefined') {
+    window.jQuery = window.$ = require('jquery');
+    require('bootstrap');
+}
+
 class App extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from 'firebase';
+import $ from 'jquery'
 
 class Navbar extends React.Component{
   loginWithGoogle = () =>{
@@ -16,7 +17,7 @@ class Navbar extends React.Component{
             uid: user.uid
           }
           console.log(userData);
-          // ...
+          $('#login').modal('hide');
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
