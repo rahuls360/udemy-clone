@@ -1,8 +1,11 @@
 import React from "react";
+import Navbar from "./Navbar";
 
 class Buy extends React.Component {
   render() {
     return (
+      <>
+      <Navbar></Navbar>
       <div className="buy">
         <img src={this.props.location.state.image} alt="" />
         <h3>{this.props.location.state.name}</h3>
@@ -11,6 +14,7 @@ class Buy extends React.Component {
           Rs {this.props.location.state.price}
         </button>
       </div>
+      </>
     );
   }
 }
