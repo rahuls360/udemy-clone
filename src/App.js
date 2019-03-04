@@ -14,39 +14,60 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      courses: {}
+      courses: {},
+      user: {},
+      myCourse: []
     };
   }
 
   componentDidMount() {
-    this.ref = base.syncState("Udemy-Clone", {
+    this.courseRef = base.syncState("Udemy-Clone", {
       context: this,
       state: "courses"
     });
   }
 
   componentWillUnmount() {
-    base.removeBinding(this.ref);
+    base.removeBinding(this.courseRef);
+    base.removeBinding(this.myCourseRef);
   }
 
   checkUser = userData => {
-    console.log(this.state.courses);
-    // if(userData.isNewUser){
-    var immediatelyAvailableReference = base
-      .post("users/" + userData.uid, {
-        data: {
-          courses: Array(Object.keys(this.state.courses).length).fill(false),
-          userData: userData
-        }
-      })
-      .then(newLocation => {
-        var generatedKey = newLocation.key;
-        console.log(newLocation);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.setState({ user: userData });
+    if (userData.isNewUser) {
+      var immediatelyAvailableReference = base
+        .post("users/" + userData.uid, {
+          data: {
+            courses: Array(Object.keys(this.state.courses).length).fill(false),
+            userData: userData
+          }
+        })
+        .then(() => {
+          console.log("User created");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    // else {
+    // base
+    //   .fetch("users/" + userData.uid + "/courses", {
+    //     context: this,
+    //     asArray: true
+    //   })
+    //   .then(data => {
+    //     console.log(data);
+    //     this.setState({ myCourse: data });
+    //   })
+    //   .catch(error => {
+    //     //handle error
+    //     console.log(error);
+    //   });
     // }
+    this.myCourseRef = base.syncState("users/" + userData.uid + "/courses", {
+      context: this,
+      state: "myCourse"
+    });
   };
 
   render() {
